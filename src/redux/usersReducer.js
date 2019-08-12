@@ -63,5 +63,7 @@ export const setCurrentPageAC = (currentPage, users) =>
     ({type: SET_CURRENT_PAGE, currentPage, users});
     
 export const toggleIsFetchingAC = (isFetching) => 
-    ({type: TOGGLE_IS_FETCHING, isFetching})
+    ({type: TOGGLE_IS_FETCHING, isFetching});
+
+    
 export default usersReducer;

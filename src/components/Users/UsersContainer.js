@@ -23,20 +23,20 @@ class UsersAPIComponent  extends React.Component {
     }
     
     render() {
-        return <Preloader isFetching={this.props.isFetching}>
-            <Users 
-                totalUsersCount = {this.props.totalUsersCount}  
-                users = {this.props.users}
-                onPageChanged = {this.onPageChanged}
-                follow = {this.props.follow}
-                unfollow = {this.props.unfollow}
-                pageSize = {this.props.pageSize}
-                currentPage = {this.props.currentPage}
-            />
-        </Preloader>;
+        return  <>
+                <Preloader isFetching={this.props.isFetching}/>
+                <Users 
+                    totalUsersCount = {this.props.totalUsersCount}  
+                    users = {this.props.users}
+                    onPageChanged = {this.onPageChanged}
+                    follow = {this.props.follow}
+                    unfollow = {this.props.unfollow}
+                    pageSize = {this.props.pageSize}
+                    currentPage = {this.props.currentPage}
+                />
+                </>;
     }
 };
-
 
 let mapStateToProps = (state) => {
     return {
@@ -47,26 +47,14 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching
     }
 };
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-            dispatch(followAC(userId));
-        },
-        unfollow: (userId) => {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers: (users, totalUsersCount) => {
-            dispatch(setUsersAC(users, totalUsersCount));
-        },
-        setCurrentPage: (currentPage, users) => {
-            dispatch(setCurrentPageAC(currentPage, users));
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingAC(isFetching));
-        },
-    }
-};
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+
+const UsersContainer = connect(mapStateToProps, {
+    follow: followAC,
+    unfollow: unfollowAC,
+    setUsers:setUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    toggleIsFetching: toggleIsFetchingAC,
+})(UsersAPIComponent);
 
 
 export default UsersContainer;
