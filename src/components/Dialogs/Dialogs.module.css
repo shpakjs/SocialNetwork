@@ -1,0 +1,32 @@
+.dialogs {
+    height: 100vh;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogs__items {
+    background: rgb(208, 208, 208);
+    padding: 20px 0;
+}
+
+.messages {
+    padding: 2%;
+}
+.new__message textarea {
+    width: 95%;
+    display: block;
+    height: 50px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+}
+
+.new__message button {
+    background: rgb(233, 86, 111);
+    color: #fff;
+    padding: 10px 30px;
+    border: none;
+    margin: 0 5% 20px;
+    float: right;
+
+}

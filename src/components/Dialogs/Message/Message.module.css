@@ -1,0 +1,25 @@
+.message {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px 0;
+    width: max-content;
+    padding: 7px 10px;
+}
+
+.author {
+    color: rgb(233, 86, 111);
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.time {
+    font-size: 12px;
+    color: #9f9f9f;
+}
+
+.body {
+    font-size: 14px;
+}
+.message:nth-child(2n) {
+    
+}

@@ -1,0 +1,32 @@
+.nav__wrapper {
+    grid-area: n;
+    background: rgb(44, 44, 44);
+    height: 100%;
+}
+
+.logo {
+    height: 50px;
+    display: block;
+    margin: 20px auto;
+
+}
+
+.nav {
+    margin-top: 50px; 
+}
+
+.item {
+    display: block;
+    margin: 15px 20px;
+}
+
+.item a {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 100;
+    color: #fff;
+}
+
+a.active{
+    color: rgb(233, 86, 111);
+} 

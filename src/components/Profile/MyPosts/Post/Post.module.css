@@ -1,0 +1,50 @@
+.post {
+    display: grid;
+    grid-template-rows: 30px auto 30px;
+    grid-template-columns: 80px auto 150px;
+    grid-template-areas: 
+    "photo name date"
+    "photo body body"
+    "photo gap controls";
+    margin: 5px 0;
+}
+.author__photo {
+    grid-area: photo;
+    position: relative;
+    height: 60px;
+    width: 60px;
+    z-index: 2;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+.author__photo img {
+    width: 100%;
+    height: auto;
+}
+
+.author__name {
+    grid-area: name;
+    color: rgb(233, 86, 111);
+}
+
+.date {
+    grid-area: date;
+    font-size: 12px;
+    color: #9f9f9f;
+}
+
+.body {
+    grid-area: body;
+    font-size: 14px;
+}
+
+.controls {
+    grid-area: controls;
+}
+
+.controls button {
+    background: none;
+    border: none;
+}

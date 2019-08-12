@@ -1,0 +1,11 @@
+.dialog {
+    font-size: 14px;
+    color: #666;
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+}
+.dialog.active {
+    background: rgb(31, 187, 174);
+    color: #fff;
+} 
