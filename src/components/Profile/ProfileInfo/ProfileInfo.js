@@ -1,5 +1,5 @@
 import React from 'react';
-import bg from './../../../profile-bg.jpg';
+import bg from './../../../assets/images/profile-bg.jpg';
 import styles from './ProfileInfo.module.css';
 import userPhoto from '../../../assets/images/user.png'
 
