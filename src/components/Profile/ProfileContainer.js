@@ -2,20 +2,16 @@ import React from 'react';
 import Profile from './Profile';
 import Preloader from '../common/Preloader/Preloader';
 import {connect} from 'react-redux';
-import { setProfileInfoAC, toggleIsFetchingAC } from '../../redux/profileReducer';
+import { getProfile, getStatus, setStatus } from '../../redux/profileReducer';
 import {withRouter} from 'react-router-dom';
-import {usersAPI} from '../../api/api';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
-class ProfileAPIComponent extends React.Component {
+class ProfileContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        let userId = this.props.match.params.userId 
-            ? this.props.match.params.userId
-            : 2;
-            usersAPI.getUserProfile(userId).then(data => {
-            this.props.setProfileInfo(data);
-            this.props.toggleIsFetching(false);
-        });
+        let userId = this.props.match.params.userId ? this.props.match.params.userId : 2;
+        this.props.getProfile(userId);
+        this.props.getStatus(userId);
     }
 
     render() {
@@ -28,19 +24,15 @@ class ProfileAPIComponent extends React.Component {
 let mapStateToProps = (state) => {
     return {
         profileInfo: state.profilePage.profileInfo,
+        status: state.profilePage.status,
         isFetching: state.usersPage.isFetching
     }
 };
-let WithUrlDataContainerComponent = withRouter(ProfileAPIComponent);
-//Component for getting data from URL 
-
-const ProfileContainer = connect(mapStateToProps, 
-    {
-        toggleIsFetching: toggleIsFetchingAC,
-        setProfileInfo: setProfileInfoAC
-    }
-)(WithUrlDataContainerComponent);
 
 
 
-export default ProfileContainer;
+export default compose(
+    connect(mapStateToProps, {getProfile: getProfile, getStatus: getStatus, setStatus: setStatus}),
+    //withAuthRedirect,
+    withRouter
+)(ProfileContainer);

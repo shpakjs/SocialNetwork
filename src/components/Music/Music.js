@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Music.module.css';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 const Music = () => {
     return (
@@ -8,5 +9,5 @@ const Music = () => {
         </div>
     );
 }
-
-export default Music;
+let AuthRedirectComponent = withAuthRedirect(Music);
+export default AuthRedirectComponent;

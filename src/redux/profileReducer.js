@@ -1,7 +1,10 @@
+import {usersAPI} from '../api/api';
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 const SET_PROFILE_INFO = 'SET-PROFILE-INFO';
+const SET_STATUS = 'SET-STATUS';
 
 let initialState  = {
     posts: [
@@ -12,6 +15,7 @@ let initialState  = {
     ],
     newPostText: '',
     profileInfo: null,
+    status: null,
     isFetching: false
 };
 
@@ -39,7 +43,9 @@ const profileReducer = (state = initialState, action) => {
         case TOGGLE_IS_FETCHING: {
             return { ...state, isFetching: action.isFetching }
         }
-
+        case SET_STATUS: {
+            return { ...state, status: action.status }
+        }
         default:
             return state;
     }
@@ -54,5 +60,36 @@ export const setProfileInfoAC = (profileInfo) =>
 
 export const toggleIsFetchingAC = (isFetching) => 
     ({type: TOGGLE_IS_FETCHING, isFetching});
+
+export const setStatusAC = (status) => 
+    ({type: SET_STATUS, status});
+
+export const setStatus = (status) => { 
+    return (dispatch) => {
+            usersAPI.setStatus(status).then(data => {
+                dispatch(setStatusAC(data));
+        });
+    }
+}
+//thunk creator
+export const getStatus = (userId) => { 
+    return (dispatch) => {
+        usersAPI.getStatus(userId).then(data => {
+            let statusText = data ? data: '';
+            dispatch(setStatusAC(statusText));
+        });
+    }
+}
+//thunk creator
+export const getProfile = (userId) => { 
+    return (dispatch) => {
+        dispatch(toggleIsFetchingAC(true));
+            usersAPI.getUserProfile(userId).then(data => {
+                dispatch(setProfileInfoAC(data));
+                dispatch(toggleIsFetchingAC(false));
+        });
+    }
+}
+
 
 export default profileReducer;

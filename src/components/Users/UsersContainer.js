@@ -3,15 +3,16 @@ import {connect} from 'react-redux';
 import {follow, unfollow, getUsers} from '../../redux/usersReducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
-class UsersAPIComponent  extends React.Component {
+class UsersContainer  extends React.Component {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
     onPageChanged = (p) => {
         this.props.getUsers(p, this.props.pageSize);
     }
-    
     render() {
         return  <>
                     <Preloader isFetching={this.props.isFetching}/>
@@ -41,10 +42,11 @@ let mapStateToProps = (state) => {
     }
 };
 
-const UsersContainer = connect(mapStateToProps, {
-    follow: follow,
-    unfollow: unfollow,
-    getUsers: getUsers
-})(UsersAPIComponent);
-
-export default UsersContainer;
+export default compose(
+    connect(mapStateToProps, {
+        follow: follow,
+        unfollow: unfollow,
+        getUsers: getUsers
+    }),
+    withAuthRedirect
+)(UsersContainer);

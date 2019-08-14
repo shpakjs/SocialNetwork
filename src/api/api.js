@@ -16,7 +16,7 @@ export const usersAPI = {
                 return response.data
             });
     },
-    getUserProfile(userId = 2) {
+    getUserProfile(userId) {
         return instance.get(`profile/${userId}`)
         .then(response => {
             return response.data
@@ -34,4 +34,26 @@ export const usersAPI = {
             return response.data
         });
     },
+    getStatus(userId) {
+        return instance.get(`profile/status/${userId}`)
+        .then(response => {
+            return response.data
+        });
+    },
+    setStatus(status) {
+        return instance.put(`profile/status`, {status: status})
+        .then(response => {
+            return response.data
+        });
+    }
+    
+}
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
+            .then(response => {
+                return response.data.data
+            });
+    }
 }

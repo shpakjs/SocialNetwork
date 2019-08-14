@@ -2,6 +2,7 @@ import React from 'react';
 import bg from './../../../assets/images/profile-bg.jpg';
 import styles from './ProfileInfo.module.css';
 import userPhoto from '../../../assets/images/user.png'
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
     let info = props.info;
@@ -15,8 +16,8 @@ const ProfileInfo = (props) => {
                 </div>
                 <div className = {styles.info}>
                     <h4 className= {styles.name}>{info.fullName}</h4>
-                    <div className= {styles.info__item}>{info.aboutMe}</div>
                     <div className= {styles.info__item}>{info.lookingForAJobDescription}</div>
+                    <ProfileStatus status = {props.status} setStatus = {props.setStatus}/>
                 </div>
             </div>
         </div>);
