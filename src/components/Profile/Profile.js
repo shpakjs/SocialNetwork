@@ -10,7 +10,7 @@ const Profile = (props) => {
                 ? <><ProfileInfo 
                     info={props.profileInfo} 
                     status= {props.status}
-                    setStatus = {props.setStatus} />
+                    updateStatus = {props.updateStatus} />
                     <MyPostsContainer posts={props.posts} /></>
                 : ''
             }

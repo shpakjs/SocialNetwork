@@ -4,38 +4,48 @@ import styles from './ProfileInfo.module.css';
 class ProfileStatus extends React.Component {
     state = {
         editMode: false,
-        title: this.props.status ? this.props.status: ''
+        status: this.props.status || 'Edit status'
     }
-    activateEditMode() {
+    activateEditMode = () => {
         this.setState({
             editMode: true
         });
     }
-    deactivateEditMode() {
+    deactivateEditMode = () => {
         this.setState({
             editMode: false
         });
-        this.props.setStatus(this.state.title);
+        this.props.updateStatus(this.state.status);
     }
-    changeStatusText() {
+    changeStatusText = (e) => {
         this.setState({
-            title: this.newStatusElement.current.value
+            status: e.currentTarget.value
         });
     }
-    newStatusElement = React.createRef()
+    
+    componentDidUpdate(prevProps) {
+        if(prevProps.status !== this.props.status){
+            this.setState({
+                status: this.props.status || 'Edit status'
+            });
+        }
+    }
 
     render() {
         return (<div className= {styles.info__item}>
             {this.state.editMode
                 ? <div>
                     <input 
-                        ref={ this.newStatusElement } 
                         autoFocus={true} 
-                        onBlur={this.deactivateEditMode.bind(this)} 
-                        value={this.state.title} 
+                        onBlur={this.deactivateEditMode} 
+                        value={this.state.status} 
                         placeholder="Enter your status"
-                        onChange={this.changeStatusText.bind(this)}/></div>
-                : <div><span onDoubleClick={this.activateEditMode.bind(this)}>{this.state.title.length > 0 ? this.state.title: 'Edit status'}</span></div>
+                        onChange={this.changeStatusText}/></div>
+                : <div>
+                    <span onDoubleClick={this.activateEditMode}>
+                        {this.state.status}
+                    </span>
+                </div>
             }
         </div>);
     }

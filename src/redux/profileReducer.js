@@ -1,4 +1,4 @@
-import {usersAPI} from '../api/api';
+import {profileAPI} from '../api/api';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
@@ -64,19 +64,20 @@ export const toggleIsFetchingAC = (isFetching) =>
 export const setStatusAC = (status) => 
     ({type: SET_STATUS, status});
 
-export const setStatus = (status) => { 
+export const updateStatus = (status) => { 
     return (dispatch) => {
-            usersAPI.setStatus(status).then(data => {
-                dispatch(setStatusAC(data));
+            profileAPI.setStatus(status).then(response => {
+                if(response.data.resultCode === 0){
+                    dispatch(setStatusAC(status));
+                }
         });
     }
 }
 //thunk creator
 export const getStatus = (userId) => { 
     return (dispatch) => {
-        usersAPI.getStatus(userId).then(data => {
-            let statusText = data ? data: '';
-            dispatch(setStatusAC(statusText));
+        profileAPI.getStatus(userId).then(data => {
+            dispatch(setStatusAC(data));
         });
     }
 }
@@ -84,7 +85,7 @@ export const getStatus = (userId) => {
 export const getProfile = (userId) => { 
     return (dispatch) => {
         dispatch(toggleIsFetchingAC(true));
-            usersAPI.getUserProfile(userId).then(data => {
+            profileAPI.getUserProfile(userId).then(data => {
                 dispatch(setProfileInfoAC(data));
                 dispatch(toggleIsFetchingAC(false));
         });

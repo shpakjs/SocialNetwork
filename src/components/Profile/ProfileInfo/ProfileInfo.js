@@ -17,7 +17,7 @@ const ProfileInfo = (props) => {
                 <div className = {styles.info}>
                     <h4 className= {styles.name}>{info.fullName}</h4>
                     <div className= {styles.info__item}>{info.lookingForAJobDescription}</div>
-                    <ProfileStatus status = {props.status} setStatus = {props.setStatus}/>
+                    <ProfileStatus status = {props.status} updateStatus = {props.updateStatus}/>
                 </div>
             </div>
         </div>);
