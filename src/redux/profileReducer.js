@@ -1,7 +1,6 @@
 import {profileAPI} from '../api/api';
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 const SET_PROFILE_INFO = 'SET-PROFILE-INFO';
 const SET_STATUS = 'SET-STATUS';
@@ -13,7 +12,6 @@ let initialState  = {
         { id: '3', author: 'Yuliia', date: '22.07.2019', body:'Ho'},
         { id: '4', author: 'Yuliia', date: '16.07.2019', body:'Hooray'},
     ],
-    newPostText: '',
     profileInfo: null,
     status: null,
     isFetching: false
@@ -25,17 +23,13 @@ const profileReducer = (state = initialState, action) => {
             let newPost = {
                 id: state.posts.length+2,
                 author: 'Masha',
-                body: state.newPostText,
+                body: action.newPostText,
                 date: '9.07.2019',
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ''
+                posts: [...state.posts, newPost]
             };
-        }
-        case UPDATE_NEW_POST: {
-            return {...state, newPostText:action.newText };
         }
         case SET_PROFILE_INFO: {
             return { ...state, profileInfo: action.profileInfo };
@@ -50,10 +44,7 @@ const profileReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const addPostAC = () => ({ type: ADD_POST });
-
-export const updateNewPostTextAC = (text) => 
-    ({type: UPDATE_NEW_POST, newText: text });
+export const addPostAC = (newPostText) => ({ type: ADD_POST , newPostText: newPostText.newPostbody});
 
 export const setProfileInfoAC = (profileInfo) => 
     ({type: SET_PROFILE_INFO, profileInfo: profileInfo });

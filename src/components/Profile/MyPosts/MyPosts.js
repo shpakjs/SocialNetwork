@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
+import NewPost from './NewPost';
 
 const MyPosts = (props) => {
 
@@ -13,24 +14,14 @@ const MyPosts = (props) => {
             date = { post.date }
         />);
     });
-
-    let newPostElement = React.createRef();
-    
-    let onAddPost = () => {
-        props.addPost();
-    }
-    let onPostChange = () => {
-        let text  = newPostElement.current.value;
-        props.updateNewPostText(text);
+    let onAddPost = (newPostText) => {
+        props.addPost(newPostText);
     }
 
     return (
         <div className={styles.posts}>
             <div>My posts</div>
-            <div className = {styles.add__post}>
-                <textarea rows="10" ref={ newPostElement } onChange={onPostChange} value={props.newPostText}/>
-                <button onClick={ onAddPost } >Add post</button>
-            </div>
+            <NewPost addPost={onAddPost}/>
             <div>{ posts }</div>
         </div>
     );
