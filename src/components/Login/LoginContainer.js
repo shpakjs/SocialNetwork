@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {authMe} from '../../redux/authReducer';
+import {login} from '../../redux/authReducer';
 import Login from './Login';
 
 class LoginAPIComponent  extends React.Component {
 
-    onLogin = () => {
-        this.props.authMe();
+    onLogin = (email, password, rememberMe) => {
+        this.props.login(email, password, rememberMe);
     }
     
     render() {
@@ -24,7 +24,7 @@ let mapStateToProps = (state) => {
 };
 
 const LoginContainer = connect(mapStateToProps, {
-    authMe: authMe,
+    login: login,
 })(LoginAPIComponent);
 
 export default LoginContainer;

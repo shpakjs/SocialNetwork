@@ -5,7 +5,7 @@ import styles from './Header.module.css';
 let Header = (props) => {
         return (<div>
             { props.isAuth
-            ? <span>{props.login}</span>
+            ? <button onClick={props.logout} >Logout</button>
             : <NavLink to="/login" >Login</NavLink>
             }
         </div>);
