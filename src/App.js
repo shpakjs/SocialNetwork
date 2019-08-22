@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -9,12 +9,20 @@ import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import Login from './components/Login/Login';
 import LoginContainer from './components/Login/LoginContainer';
+import { initialize } from './redux/appReducer';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import Preloader from './components/common/Preloader/Preloader';
 
-function App(props) {
-  return (
-      <div className="app-wraper">
+class App extends React.Component {
+  componentDidMount () {
+      this.props.initialize();
+  }
+
+  render() {
+    if(this.props.isInitialized) {
+      return (<div className="app-wraper">
         <Navbar />
         <div className="app-wraper-content">
             <HeaderContainer />
@@ -30,8 +38,15 @@ function App(props) {
             <Route path = '/settings' component = {Settings} />
             <Route path = '/login' component = { () => <LoginContainer/> } />
         </div>
-      </div>
-  );
+      </div>)
+    } else { return <Preloader /> }
+  }
 }
-
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isInitialized: state.app.initialized
+  }
+}
+export default compose(
+    connect(mapStateToProps, {initialize}),
+    withRouter)(App);

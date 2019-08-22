@@ -55,11 +55,10 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`)
             .then(response => {
-                return response.data.data
+                return response.data
             });
     },
     login(email, password, remeberMe = false) {
-        debugger;
         return instance.post(`auth/login`, {email, password, remeberMe});
     },
     logout() {

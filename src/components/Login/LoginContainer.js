@@ -4,11 +4,9 @@ import {login} from '../../redux/authReducer';
 import Login from './Login';
 
 class LoginAPIComponent  extends React.Component {
-
     onLogin = (email, password, rememberMe) => {
         this.props.login(email, password, rememberMe);
     }
-    
     render() {
         return( <Login
             isAuth = {this.props.isAuth}
