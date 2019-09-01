@@ -4,13 +4,14 @@ const ADD_POST = 'ADD-POST';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 const SET_PROFILE_INFO = 'SET-PROFILE-INFO';
 const SET_STATUS = 'SET-STATUS';
+const DELETE_POST = 'DELETE-POST';
 
 let initialState  = {
     posts: [
-        { id: '1', author: 'Yuliia', date: '12.07.2019', body:'Hi'},
-        { id: '2', author: 'Yuliia', date: '03.04.2019', body:'Hey'},
-        { id: '3', author: 'Yuliia', date: '22.07.2019', body:'Ho'},
-        { id: '4', author: 'Yuliia', date: '16.07.2019', body:'Hooray'},
+        { id: 1, author: 'Yuliia', date: '12.07.2019', body:'Hi'},
+        { id: 2, author: 'Yuliia', date: '03.04.2019', body:'Hey'},
+        { id: 3, author: 'Yuliia', date: '22.07.2019', body:'Ho'},
+        { id: 4, author: 'Yuliia', date: '16.07.2019', body:'Hooray'},
     ],
     profileInfo: null,
     status: null,
@@ -31,6 +32,10 @@ const profileReducer = (state = initialState, action) => {
                 posts: [...state.posts, newPost]
             };
         }
+        case DELETE_POST: {
+            return {...state,
+                posts: state.posts.filter(item => item.id !== action.postId)};
+        }
         case SET_PROFILE_INFO: {
             return { ...state, profileInfo: action.profileInfo };
         }
@@ -44,7 +49,9 @@ const profileReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const addPostAC = (newPostText) => ({ type: ADD_POST , newPostText: newPostText.newPostbody});
+export const addPostAC = (newPostText) => ({ type: ADD_POST , newPostText: newPostText});
+
+export const deletePostAC = (postId) => ({ type: DELETE_POST , postId: postId});
 
 export const setProfileInfoAC = (profileInfo) => 
     ({type: SET_PROFILE_INFO, profileInfo: profileInfo });

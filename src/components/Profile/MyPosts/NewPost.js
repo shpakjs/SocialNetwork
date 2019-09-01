@@ -10,7 +10,7 @@ const NewPostForm = (props) => {
     return <form onSubmit={props.handleSubmit} >
             <Field 
                 rows="10" 
-                name="newPostbody" 
+                name="newPostBody" 
                 placeholder="Enter your genious thoughts" 
                 component={Textarea}
                 validate={[requiredField, maxLength30]}/>
@@ -21,7 +21,7 @@ const NewPostRedaxForm = reduxForm({form: 'newPostForm'})(NewPostForm);
 
 const NewPost = (props) => {
     const onPostSubmit = (formData) => {
-        props.addPost(formData);
+        props.addPost(formData.newPostBody);
     }
     return <div className = {styles.add__post}><NewPostRedaxForm onSubmit={onPostSubmit}/></div>
 }
