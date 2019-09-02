@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import styles from './Login.module.css';
 import {login} from '../../redux/authReducer';
 import Login from './Login';
 
@@ -8,10 +9,11 @@ class LoginAPIComponent  extends React.Component {
         this.props.login(email, password, rememberMe);
     }
     render() {
-        return( <Login
-            isAuth = {this.props.isAuth}
-            onLogin = {this.onLogin}
-        />);
+        return( <div className={styles.loginForm}>
+            <Login
+                isAuth = {this.props.isAuth}
+                onLogin = {this.onLogin}
+        /></div>);
     }
 };
 

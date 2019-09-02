@@ -1,8 +1,13 @@
 .formControl.error input,
 .formControl.error textarea {
-    border: 1px solid red;
+    border: 1px solid rgb(233, 86, 111);
+    transition: all .3s;
 }
 
 .formControl.error span {
-    color: red;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: rgb(233, 86, 111);
+    transition: all .3s;
 }

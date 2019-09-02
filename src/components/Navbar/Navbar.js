@@ -1,11 +1,10 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from './Navbar.module.css';
-import logo from './../../assets/images/puzzle.svg'
+import logo from './../../assets/images/puzzle.svg';
 
-const Navbar = () => {
-    return (
-        <div className = {styles.nav__wrapper}> 
+const Navbar = (props) => {
+    return (<div className = {styles.nav__wrapper}> 
             <img src={logo} className={styles.logo} alt=""/>
             <nav className = {styles.nav}>
                 <div className ={`${styles.item} ${styles.active}`}>
@@ -25,6 +24,9 @@ const Navbar = () => {
                 </div>
                 <div className = {styles.item}>
                     <NavLink to="/users" activeClassName = {styles.active}>Users</NavLink>
+                </div>
+                <div className = {styles.item}>
+                    <button onClick={props.logout} >Logout</button>
                 </div>
             </nav>
         </div>

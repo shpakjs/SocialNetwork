@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className = {styles.user__info}>
                 <div className = {styles.user__photo}>
-                    <img src={info.photos.small != null ? info.photos.small: userPhoto} alt="user-picture"/>
+                    <img src={info.photos.small != null ? info.photos.small: userPhoto} alt="user-pic"/>
                 </div>
                 <div className = {styles.info}>
                     <h4 className= {styles.name}>{info.fullName}</h4>

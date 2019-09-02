@@ -1,14 +1,13 @@
 import React from 'react';
 import {Route, withRouter} from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
+import NavbarContainer from './components/Navbar/NavbarContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import { initialize } from './redux/appReducer';
 import { connect } from 'react-redux';
@@ -23,9 +22,8 @@ class App extends React.Component {
   render() {
     if(this.props.isInitialized) {
       return (<div className="app-wraper">
-        <Navbar />
+        <NavbarContainer />
         <div className="app-wraper-content">
-            <HeaderContainer />
             <Route path = '/profile:userId?' render ={ () => 
               <ProfileContainer/>
             }/>

@@ -15,7 +15,7 @@ let Users = (props) => {
                 props.users.map (user =>  <div className = {styles.user} key = {user.id}>
                     <div className={styles.user__photo}>
                         <NavLink to={'/profile' + user.id}>
-                            <img src={user.photos.small != null ? user.photos.small: userPhoto} alt="user-picture"/>
+                            <img src={user.photos.small != null ? user.photos.small: userPhoto} alt="user-pic"/>
                         </NavLink>
                     </div>
                     <div className={styles.follow}>
@@ -38,7 +38,7 @@ let Users = (props) => {
             <div className={styles.pagination}>
                 {
                     pages.map(p => {
-                        return <span key={p} onClick={() => {props.onPageChanged(p)}} className={props.currentPage == p ? styles.selected : '' }> {p} </span>
+                        return <span key={p} onClick={() => {props.onPageChanged(p)}} className={props.currentPage === p ? styles.selected : '' }> {p} </span>
                     })
                 }
             </div>
