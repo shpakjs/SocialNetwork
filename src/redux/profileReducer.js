@@ -8,10 +8,10 @@ const DELETE_POST = 'DELETE-POST';
 
 let initialState  = {
     posts: [
-        { id: 1, author: 'Yuliia', date: '12.07.2019', body:'Hi'},
-        { id: 2, author: 'Yuliia', date: '03.04.2019', body:'Hey'},
-        { id: 3, author: 'Yuliia', date: '22.07.2019', body:'Ho'},
-        { id: 4, author: 'Yuliia', date: '16.07.2019', body:'Hooray'},
+        { id: 1, author: 'shpakjs', date: '7/13/2019', body:'Hi'},
+        { id: 2, author: 'shpakjs', date: '7/11/2019', body:'Hey'},
+        { id: 3, author: 'shpakjs', date: '6/20/2019', body:'Ho'},
+        { id: 4, author: 'shpakjs', date: '7/17/2019', body:'Hooray'},
     ],
     profileInfo: null,
     status: null,
@@ -23,9 +23,9 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let newPost = {
                 id: state.posts.length+2,
-                author: 'Masha',
+                author: state.profileInfo.fullName,
                 body: action.newPostText,
-                date: '9.07.2019',
+                date: (new Date()).toLocaleDateString('en-us'),
             };
             return {
                 ...state,

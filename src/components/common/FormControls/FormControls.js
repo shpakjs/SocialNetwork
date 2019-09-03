@@ -3,7 +3,6 @@ import styles from './FormControls.module.css';
 
 export const FormControl = ({input, meta, ...props}) => {
     const hasError = meta.touched && meta.error;
-    debugger;
     return (<div className = {styles.formControl + " " + (hasError ? styles.error : '') }>
         <textarea {...input} {...props}></textarea>
         { hasError && <span>{meta.error}</span> }
