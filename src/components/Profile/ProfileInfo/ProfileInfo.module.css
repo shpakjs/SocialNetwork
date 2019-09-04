@@ -15,12 +15,13 @@
 }
 .user__photo {
   position: relative;
-  height: 150px;
-  width: 150px;
-  margin-left: 5%;
-  margin-top: -75px;
+  height: 140px;
+  width: 140px;
+  margin-left: 3%;
+  margin-top: -70px;
   z-index: 2;
-  border: 1px solid #ddd;
+  border: 1px solid #e5e5e5;
+  background: #fff;
   overflow: hidden;
 }
 
@@ -35,8 +36,9 @@
 
 .name {
   font-weight: 300;
-  font-size: 19px;
-  margin: 15px 0px 10px;
+  font-size: 22px;
+  color: #222;
+  margin: 10px 0px 10px;
 }
 .info__item {
   font-size: 13px;

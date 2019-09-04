@@ -17,10 +17,11 @@
   position: relative;
   height: 150px;
   width: 150px;
-  margin-left: 5%;
+  margin-left: 3%;
   margin-top: -75px;
+  background: #fff;
   z-index: 2;
-  border: 1px solid #ddd;
+  border: 1px solid #e5e5e5;
   overflow: hidden;
 }
 
