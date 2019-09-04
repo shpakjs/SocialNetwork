@@ -12,5 +12,4 @@ a, a:hover, a:visited {
 
 .app-wraper-content {
     grid-area: c;
-    position: relative;
 }

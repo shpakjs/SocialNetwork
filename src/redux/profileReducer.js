@@ -53,42 +53,29 @@ export const addPostAC = (newPostText) => ({ type: ADD_POST , newPostText: newPo
 
 export const deletePostAC = (postId) => ({ type: DELETE_POST , postId: postId});
 
-export const setProfileInfoAC = (profileInfo) => 
-    ({type: SET_PROFILE_INFO, profileInfo: profileInfo });
+export const setProfileInfoAC = (profileInfo) => ({type: SET_PROFILE_INFO, profileInfo: profileInfo });
 
-export const toggleIsFetchingAC = (isFetching) => 
-    ({type: TOGGLE_IS_FETCHING, isFetching});
+export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
-export const setStatusAC = (status) => 
-    ({type: SET_STATUS, status});
+export const setStatusAC = (status) => ({type: SET_STATUS, status});
 
-export const updateStatus = (status) => { 
-    return (dispatch) => {
-            profileAPI.setStatus(status).then(response => {
-                if(response.data.resultCode === 0){
-                    dispatch(setStatusAC(status));
-                }
-        });
+export const updateStatus = (status) => async (dispatch) => {
+    let response = await profileAPI.setStatus(status);
+    if(response.data.resultCode === 0){
+        dispatch(setStatusAC(status));
     }
 }
 //thunk creator
-export const getStatus = (userId) => { 
-    return (dispatch) => {
-        profileAPI.getStatus(userId).then(data => {
-            dispatch(setStatusAC(data));
-        });
-    }
+export const getStatus = (userId) => async(dispatch) => {
+    let response = await profileAPI.getStatus(userId);
+    dispatch(setStatusAC(response));
 }
 //thunk creator
-export const getProfile = (userId) => { 
-    return (dispatch) => {
-        dispatch(toggleIsFetchingAC(true));
-            profileAPI.getUserProfile(userId).then(data => {
-                dispatch(setProfileInfoAC(data));
-                dispatch(toggleIsFetchingAC(false));
-        });
-    }
+export const getProfile = (userId) => async(dispatch) => {
+    dispatch(toggleIsFetchingAC(true));
+    let response = await profileAPI.getUserProfile(userId);    
+    dispatch(setProfileInfoAC(response));
+    dispatch(toggleIsFetchingAC(false));
 }
-
 
 export default profileReducer;

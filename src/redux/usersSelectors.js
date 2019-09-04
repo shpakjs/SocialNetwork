@@ -11,7 +11,7 @@ export const getPageSize = (state) => {
     return state.usersPage.pageSize;
 }
 export const getUsersCount = (state) => {
-    return state.usernpsPage.totalUsersCount;
+    return state.usersPage.totalUsersCount;
 }
 export const getCurrentPage = (state) => {
     return state.usersPage.currentPage;

@@ -16,17 +16,11 @@ export const usersAPI = {
                 return response.data
             });
     },
-    followUser(userId) {
-        return instance.post(`follow/${userId}`)
-        .then(response => {
-            return response.data
-        });
-    },
-    unfollowUser(userId) {
-        return instance.delete(`follow/${userId}`)
-        .then(response => {
-            return response.data
-        });
+    async toggleFollowingUser(userId, isFollow) {
+        let response = isFollow 
+            ? await instance.delete(`follow/${userId}`) 
+            : await instance.post(`follow/${userId}`)
+        return response.data;
     },
 }
 

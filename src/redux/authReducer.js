@@ -1,7 +1,6 @@
 import { authAPI } from "../api/api";
 import { stopSubmit } from 'redux-form';
-import { resolve } from "path";
-const AUTH_ME = 'AUTH-ME';
+const AUTH_ME = 'auth/AUTH-ME';
 
 let initialState = {
     isAuth: false,
@@ -27,35 +26,28 @@ const authReducer = (state = initialState, action) => {
 
 export const authMeAC = (id, email, login, isAuth) => ({ type: AUTH_ME, id, email, login, isAuth });    
 //thunk creator
-export const authMe = () => (dispatch) => { 
-    return authAPI.me().then(response => {
-        if(response.resultCode === 0) {
-            let {id, login, email} = response.data;
-            dispatch(authMeAC(id, login, email, true));
-        }
-    })
+export const authMe = () => async (dispatch) => { 
+    let response = await authAPI.me();
+    if(response.resultCode === 0) {
+        let {id, login, email} = response.data;
+        dispatch(authMeAC(id, login, email, true));
+    }
 }
 
-export const login = (email,password, rememberMe = false) => (dispatch) => {
-    return authAPI.login(email, password, rememberMe)
-        .then(response => {
-            if(response.data.resultCode === 0) {
-                let {userId, login, email} = response.data.data;
-                dispatch(authMe(userId, login, email, true));
-            } else {
-                let errorMessage = response.data.messages.length > 0 ? response.data.messages[0]: 'Some error'
-                dispatch(stopSubmit('login', {_error: errorMessage}));
-            }
-        })
+export const login = (email, password, rememberMe = false) => async(dispatch) => {
+    let response = await authAPI.login(email, password, rememberMe);
+    if(response.data.resultCode === 0) {
+        let {userId, login, email} = response.data.data;
+        dispatch(authMe(userId, login, email, true));
+    } else {
+        let errorMessage = response.data.messages.length > 0 ? response.data.messages[0]: 'Some error'
+        dispatch(stopSubmit('login', {_error: errorMessage}));
+    }
 }
 
-export const logout = () => (dispatch) => {
-    authAPI.logout()
-        .then(response => {
-            if(response.data.resultCode === 0) {
-                dispatch(authMeAC(null, null, null, false));
-            }
-        })
+export const logout = () => async(dispatch) => {
+    let response = authAPI.logout();
+    dispatch(authMeAC(null, null, null, false));
 }
 
 export default authReducer;
