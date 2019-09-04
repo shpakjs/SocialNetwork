@@ -1,3 +1,6 @@
+.formControl {
+    position: relative;
+}
 .formControl.error input,
 .formControl.error textarea {
     border: 1px solid rgb(233, 86, 111);
@@ -6,7 +9,8 @@
 
 .formControl.error span {
     position: absolute;
-    bottom: 0;
+    font-size: 12px;
+    bottom: -18px;
     left: 0;
     color: rgb(233, 86, 111);
     transition: all .3s;
