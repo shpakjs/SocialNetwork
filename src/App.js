@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, withRouter} from 'react-router-dom';
+import {HashRouter, withRouter} from 'react-router-dom';
 import './App.css';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -24,17 +24,17 @@ class App extends React.Component {
       return (<div className="app-wraper">
         <NavbarContainer />
         <div className="app-wraper-content">
-            <Route path = '/profile:userId?' render ={ () => 
+            <HashRouter basename= '/profile:userId?' render ={ () => 
               <ProfileContainer/>
             }/>
-            <Route path = '/dialogs' render ={ () => 
+            <HashRouter basename= '/dialogs' render ={ () => 
               <DialogsContainer/> 
             } />
-            <Route path = '/users' component = { () => <UsersContainer/> } />
-            <Route path = '/news' component = {News} />
-            <Route path = '/music' component = {Music} />
-            <Route path = '/settings' component = {Settings} />
-            <Route path = '/login' component = { () => <LoginContainer/> } />
+            <HashRouter basename= '/users' component = { () => <UsersContainer/> } />
+            <HashRouter basename= '/news' component = {News} />
+            <HashRouter basename= '/music' component = {Music} />
+            <HashRouter basename= '/settings' component = {Settings} />
+            <HashRouter basename= '/login' component = { () => <LoginContainer/> } />
         </div>
       </div>)
     } else { return <Preloader /> }
