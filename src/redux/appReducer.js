@@ -9,6 +9,7 @@ let initialState = {
 const appReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_INITIALIZED:
+            debugger
             return {
                 ...state,
                 initialized: true
@@ -22,7 +23,7 @@ export const initializedSuccess = () => ({ type: SET_INITIALIZED });
 
 export const initialize = () => (dispatch) => {
     dispatch(authMe())
-        .then(() => dispatch(initializedSuccess()));
+    .then( () => dispatch(initializedSuccess()));
 }
 
 export default appReducer;

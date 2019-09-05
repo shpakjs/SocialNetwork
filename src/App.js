@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter, withRouter} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import './App.css';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -24,17 +24,17 @@ class App extends React.Component {
       return (<div className="app-wraper">
         <NavbarContainer />
         <div className="app-wraper-content">
-            <HashRouter basename= '/profile:userId?' render ={ () => 
+            <Route path= '/profile:userId?' render ={ () => 
               <ProfileContainer/>
             }/>
-            <HashRouter basename= '/dialogs' render ={ () => 
+            <Route path= '/dialogs' render ={ () => 
               <DialogsContainer/> 
             } />
-            <HashRouter basename= '/users' component = { () => <UsersContainer/> } />
-            <HashRouter basename= '/news' component = {News} />
-            <HashRouter basename= '/music' component = {Music} />
-            <HashRouter basename= '/settings' component = {Settings} />
-            <HashRouter basename= '/login' component = { () => <LoginContainer/> } />
+            <Route path= '/users' component = { () => <UsersContainer/> } />
+            <Route path= '/news' component = {News} />
+            <Route path= '/music' component = {Music} />
+            <Route path= '/settings' component = {Settings} />
+            <Route path= '/login' component = { () => <LoginContainer/> } />
         </div>
       </div>)
     } else { return <Preloader /> }
@@ -42,7 +42,8 @@ class App extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    isInitialized: state.app.initialized
+    isInitialized: state.app.initialized,
+    isAuthorized: state.authPage.isAuth
   }
 }
 export default compose(

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Login.module.css';
 import bg from '../../assets/images/login.jpg';
-import {reduxForm, Field} from 'redux-form';
+import {reduxForm} from 'redux-form';
 import { Input, createField } from '../common/FormControls/FormControls';
 import { requiredField } from '../../utils/validators/validators';
 import { Redirect } from 'react-router-dom';
