@@ -36,8 +36,7 @@ input:focus {
     display: grid;
     background: rgba(50,50,50,0.7);
     width: 300px;
-    margin: 20% auto;
-    padding: 4%;
+    margin: 20vh auto;
 }
 
 .login form > div {
