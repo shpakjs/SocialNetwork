@@ -13,6 +13,9 @@ import { initialize } from './redux/appReducer';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Preloader from './components/common/Preloader/Preloader';
+import {Provider} from 'react-redux';
+import {HashRouter} from 'react-router-dom';
+import store from './redux/reduxStore';
 
 class App extends React.Component {
   componentDidMount () {
@@ -46,6 +49,17 @@ const mapStateToProps = (state) => {
     isAuthorized: state.authPage.isAuth
   }
 }
-export default compose(
+
+let AppConatainer = compose(
     connect(mapStateToProps, {initialize}),
     withRouter)(App);
+
+const MainApp = (props) => {
+    return <HashRouter>
+        <Provider store={store}>
+          <AppConatainer/>
+        </Provider>
+    </HashRouter>;
+}
+
+export default MainApp;
