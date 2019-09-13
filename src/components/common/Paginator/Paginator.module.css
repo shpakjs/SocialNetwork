@@ -1,4 +1,29 @@
-.selected{
+.pagination {
+    width: max-content;
+    margin: auto;
+    margin: 10px 0
+}
+
+.pagination button {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+.pagination button svg {
+    height: 16px;
+}
+.page {
+    font-size: 20px;
+    font-family: 'Segoe UI light';
+    margin: 0 8px;
+}
+.page:hover {
+    cursor: pointer;
     font-weight: 600;
-    color: rgb(233, 86, 111);
+    color: rgb(38, 191, 166);
+    transition: .3s ease;
+}
+.selected {
+    font-weight: 600;
+    color: rgb(38, 191, 166);
 }
