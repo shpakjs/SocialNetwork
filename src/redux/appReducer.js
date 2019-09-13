@@ -1,28 +1,34 @@
-import { authMe } from "./authReducer";
+import {authAPI} from "../api/api";
+import {getAuthUserData} from "./authReducer";
 
-const SET_INITIALIZED = "SET-INITIALIZED";
+const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
+
 
 let initialState = {
     initialized: false
 };
 
 const appReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case SET_INITIALIZED:
+    switch (action.type) {
+        case INITIALIZED_SUCCESS:
             return {
                 ...state,
                 initialized: true
-            };
-        default: 
+            }
+
+        default:
             return state;
     }
 }
 
-export const initializedSuccess = () => ({ type: SET_INITIALIZED });    
+export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
-export const initialize = () => (dispatch) => {
-    dispatch(authMe())
-    .then( () => dispatch(initializedSuccess()));
+export const initializeApp = () => (dispatch) => {
+    let promise = dispatch(getAuthUserData());
+    Promise.all([promise])
+        .then(result => {
+            dispatch(initializedSuccess());
+        });
 }
 
 export default appReducer;
