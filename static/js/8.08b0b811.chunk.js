@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{302:function(t,n,e){t.exports={settings:"Settings_settings__3U_EL"}},311:function(t,n,e){"use strict";e.r(n);var s=e(0),i=e.n(s),a=e(302),c=e.n(a),o=e(93),r=Object(o.a)(function(){return i.a.createElement("div",{className:c.a.settings},"Settings")});n.default=r}}]);
+//# sourceMappingURL=8.08b0b811.chunk.js.map
