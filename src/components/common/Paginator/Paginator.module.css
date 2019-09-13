@@ -1,7 +1,7 @@
 .pagination {
     width: max-content;
     margin: auto;
-    margin: 10px 0
+    margin-bottom: 10px;
 }
 
 .pagination button {
@@ -21,7 +21,7 @@
     cursor: pointer;
     font-weight: 600;
     color: rgb(38, 191, 166);
-    transition: .3s ease;
+    transition: .2s;
 }
 .selected {
     font-weight: 600;
