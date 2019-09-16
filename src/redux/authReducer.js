@@ -31,15 +31,16 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
 
 export const getAuthUserData = () => async (dispatch) => {
     let response = await authAPI.me();
-
-    if (response.data.resultCode === 0) {
-        let {id, login, email} = response.data.data;
+    debugger;
+    if (response.data) {
+        let {id, login, email} = response.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
 }
 
 export const login = (email, password, rememberMe) => async (dispatch) => {
     let response = await authAPI.login(email, password, rememberMe);
+    debugger;
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserData())
     } else {

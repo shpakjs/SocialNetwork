@@ -35,11 +35,11 @@ class App extends React.Component {
       <div className="app-wraper-content">
           <Route path= '/profile:userId?' render ={withSuspense(ProfileContainer)}/>
           <Route path= '/dialogs' render ={withSuspense(DialogsContainer)} />
-          <Route path= '/users' component = {withSuspense(UsersContainer)}/>
-          <Route path= '/news' component =  { <News />} />
-          <Route path= '/music' component = { <Music /> } />
-          <Route path= '/settings' component = { <Settings/> } />
-          <Route path= '/login' component = {<LoginContainer/>} />
+          <Route path= '/users' render = {withSuspense(UsersContainer)}/>
+          <Route path= '/news' render =  { () => <News />} />
+          <Route path= '/music' render = { () => <Music /> } />
+          <Route path= '/settings' render = { () => <Settings/> } />
+          <Route path= '/login' render = { () => <LoginContainer/>} />
       </div>
     </div>)
   }

@@ -1,4 +1,3 @@
-import {authAPI} from "../api/api";
 import {getAuthUserData} from "./authReducer";
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
@@ -15,7 +14,6 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 initialized: true
             }
-
         default:
             return state;
     }
