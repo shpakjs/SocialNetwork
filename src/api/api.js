@@ -38,8 +38,26 @@ export const profileAPI = {
             return response.data
         });
     },
+    savePhoto(photoFile) {
+        const formData = new FormData();
+        formData.append('image', photoFile)
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/formdata'
+            }
+        })
+        .then(response => {
+            return response.data
+        });
+    },
     getUserProfile(userId) {
         return instance.get(`profile/${userId}`)
+        .then(response => {
+            return response.data
+        });
+    },
+    saveUserProfile(formData) {
+        return instance.put(`profile`, formData )
         .then(response => {
             return response.data
         });

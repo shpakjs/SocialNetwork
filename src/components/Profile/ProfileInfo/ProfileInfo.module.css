@@ -15,19 +15,26 @@
 }
 .user__photo {
   position: relative;
-  height: 140px;
+  height: 178px;
   width: 140px;
   margin-left: 3%;
   margin-top: -70px;
   z-index: 2;
-  border: 1px solid #e5e5e5;
   background: #fff;
   overflow: hidden;
 }
 
 .user__photo img {
-  width: 100%;
-  height: auto;
+  height: 140px;
+  width: auto;
+  border: 1px solid #e5e5e5;
+}
+
+input[type="file"] {
+  background: none;
+  color: #444;
+  border: none;
+  box-shadow: none;
 }
 
 .info {

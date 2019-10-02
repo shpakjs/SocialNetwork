@@ -4,6 +4,7 @@ const ADD_POST = 'ADD-POST';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 const SET_PROFILE_INFO = 'SET-PROFILE-INFO';
 const SET_STATUS = 'SET-STATUS';
+const SET_PHOTO = 'SET-PHOTO';
 const DELETE_POST = 'DELETE-POST';
 
 let initialState  = {
@@ -45,6 +46,9 @@ const profileReducer = (state = initialState, action) => {
         case SET_STATUS: {
             return { ...state, status: action.status }
         }
+        case SET_PHOTO: {
+            return { ...state,  profileInfo: { ...state.profileInfo, photos: action.photo } }
+        }
         default:
             return state;
     }
@@ -59,6 +63,8 @@ export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, is
 
 export const setStatusAC = (status) => ({type: SET_STATUS, status});
 
+export const setPhotoAC = (photo) => ({type: SET_PHOTO, photo});
+
 export const updateStatus = (status) => async (dispatch) => {
     let response = await profileAPI.setStatus(status);
     if(response.data.resultCode === 0){
@@ -70,12 +76,29 @@ export const getStatus = (userId) => async(dispatch) => {
     let response = await profileAPI.getStatus(userId);
     dispatch(setStatusAC(response));
 }
+
+//thunk creator
+export const savePhoto = (photo) => async (dispatch) => {
+    let response = await profileAPI.savePhoto(photo);
+    if(response.resultCode === 0) {
+        dispatch(setPhotoAC(response.data.photos));
+    }
+}
 //thunk creator
 export const getProfile = (userId) => async(dispatch) => {
     dispatch(toggleIsFetchingAC(true));
     let response = await profileAPI.getUserProfile(userId);    
     dispatch(setProfileInfoAC(response));
     dispatch(toggleIsFetchingAC(false));
+}
+
+//thunk creator
+export const saveProfile = (formData) => async(dispatch) => {
+    dispatch(toggleIsFetchingAC(true));
+    let response = await profileAPI.saveUserProfile(formData);  
+    if(response.resultCode === 0) {
+        //getProfile(userId);
+    }
 }
 
 export default profileReducer;
