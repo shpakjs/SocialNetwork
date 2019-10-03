@@ -9,11 +9,10 @@ const Dialogs = (props) => {
         return (
             <DialogItem 
                 key = {dialog.id} 
-                name = {dialog.name} 
-                id = {dialog.id}
+                {...dialog}
             />);
     });
-    let messagesElements = props.messages.map( message => {
+    /*let messagesElements = props.messages.map( message => {
         return (
             <Message 
             key = {message.id} 
@@ -22,15 +21,13 @@ const Dialogs = (props) => {
             time = {message.time}
             />
         );
-    });
-
+    });*/
     return (
         <div className = {styles.dialogs}> 
             <div className = {styles.dialogs__items}>
                 { dialogsElements }
             </div>
-            <div className = {styles.messages}>
-                { messagesElements }
+            <div className = {styles.messages}>                
                 <NewMessage sendMessage={props.addMessage}/>
             </div>
         </div>

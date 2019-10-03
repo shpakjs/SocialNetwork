@@ -84,3 +84,18 @@ export const securityAPI = {
         return instance.get('security/get-captcha-url');
     }
 }
+
+export const dialogsAPI = {
+    getDialogs() {
+        return instance.get('dialogs');
+    },
+    startDialog(userId) {
+        return instance.put(`dialogs/${userId}`);
+    },
+    getDialogMessages(userId) {
+        return instance.get(`dialogs/${userId}/messages`);
+    },
+    sendMessage(userId, messageText) {
+        return instance.post(`dialogs/${userId}/messages`, { body: messageText });
+    }
+}

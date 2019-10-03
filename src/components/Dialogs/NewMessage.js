@@ -19,6 +19,7 @@ const NewMessageForm = (props) => {
 
 }
 const NewMessageReduxForm = reduxForm({form: 'newMessage'})(NewMessageForm);
+
 const NewMessage = (props) => {
     const onSubmitMessage = (formData) => {
         props.sendMessage(formData);

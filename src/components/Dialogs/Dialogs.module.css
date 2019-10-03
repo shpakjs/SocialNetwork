@@ -6,12 +6,18 @@
 }
 
 .dialogs__items {
-    background: rgb(208, 208, 208);
-    padding: 20px 0;
+    border-right: 1px solid #ddd;
 }
 
 .messages {
+    position: relative;
     padding: 2%;
+}
+.new__message {
+    width: 98%;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
 }
 .new__message textarea {
     width: 95%;

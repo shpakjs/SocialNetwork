@@ -1,5 +1,6 @@
-import {profileAPI} from '../api/api';
-import {stopSubmit} from "redux-form";
+import {profileAPI, dialogsAPI} from '../api/api';
+import {stopSubmit} from 'redux-form';
+import {push} from 'react-router-redux';
 
 const ADD_POST = 'ADD-POST';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
@@ -109,6 +110,14 @@ export const saveProfile = (formData) => async(dispatch, getState) => {
         dispatch(stopSubmit("edit-profile", errorData));
         return Promise.reject(message);
     }
+}
+
+//thunk creator
+export const startDialog = (userId) => async(dispatch) => {
+    let response = await dialogsAPI.startDialog(userId); 
+    if(response.data.resultCode === 0) {
+        dispatch(push('/dialogs'));
+    }   
 }
 
 export default profileReducer;

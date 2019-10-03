@@ -17,7 +17,9 @@ let User = ({user, followingInProgress, toggleFollowing}) => {
                 </button>
             </div>
             <div className={styles.user__name}>
-                {user.name}
+                <NavLink to={'/profile' + user.id}>
+                    {user.name}
+                </NavLink>
             </div>
             <div className = {styles.user__location}>{user.location ? user.location.city: '' }</div>
             <div className = {styles.user__status}>

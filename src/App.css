@@ -13,3 +13,13 @@ a, a:hover, a:visited {
 .app-wraper-content {
     grid-area: c;
 }
+
+button{
+  grid-area: follow;
+  border: none;
+  box-shadow: none;
+  padding: 6px 15px;
+  margin: 5px 15px;
+  background-color: rgb(233, 86, 111);
+  color: #fff;
+}

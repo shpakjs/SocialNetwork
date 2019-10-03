@@ -1,11 +1,26 @@
 .dialog {
-    font-size: 14px;
-    color: #666;
-    display: block;
-    margin: 10px 0;
+    font-size: 14px;    
+    display: list-item;
+    background: #fff;
     padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 .dialog.active {
     background: rgb(31, 187, 174);
     color: #fff;
 } 
+
+.user__photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    margin-right: 18px;
+} 
+.user__name {
+    margin-top: 0px;
+}
+.date {
+    font-size: 12px;
+    color: #aaa;
+    float: right;
+}

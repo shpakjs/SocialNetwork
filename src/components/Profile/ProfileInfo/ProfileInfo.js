@@ -21,7 +21,9 @@ const ProfileInfo = (props) => {
             setEditMode(false);
         })
     }
-
+    const onStartDialog = () => {
+        props.startDialog(info.userId)
+    }
     return (<div className = {styles.profile}>
             <div className = {styles.profile__header}>
                 <img src = {bg} alt=""/>
@@ -29,15 +31,15 @@ const ProfileInfo = (props) => {
             <div className = {styles.user__info}>
                 <div className = {styles.user__photo}>
                     <img src={info.photos.large != null ? info.photos.large: userPhoto} alt="user-pic"/>
-                    { props.isOwner ? <div><input type="file" onChange={ onMainPhotoSelected } id="file"/><label for="file">change photo</label></div> : '' }
+                    { props.isOwner ? <div><input type="file" onChange={ onMainPhotoSelected } id="file"/><label for="file">change photo</label></div> : <button onClick={onStartDialog}>Text to {info.fullName}</button> }
                 </div>
                 <div className = {styles.info}>
                     <h4 className= {styles.name}>{info.fullName}</h4>
-                    <ProfileStatusWithHooks status = {props.status} updateStatus = {props.updateStatus} />
+                    <ProfileStatusWithHooks status = {props.status} updateStatus = {props.updateStatus} isOwner={props.isOwner}/>
                 </div>
             </div>
             { editMode 
-                ? <ProfileDataForm profile = { info } initialValues={ info } onSubmit={ onProfileFormSubmit } />
+                ? <ProfileDataForm profile = { info } initialValues={ info } onSubmit={ onProfileFormSubmit } isOwner={props.isOwner} />
                 : <ProfileData { ...info } isOwner={props.isOwner} goToEditMode={ () =>  setEditMode(true) }/>
             }
         </div>);
