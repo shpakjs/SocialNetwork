@@ -71,10 +71,16 @@ export const authAPI = {
                 return response.data
             });
     },
-    login(email, password, remeberMe = false) {
-        return instance.post(`auth/login`, {email, password, remeberMe});
+    login(email, password, remeberMe = false, captcha = null) {
+        return instance.post(`auth/login`, {email, password, remeberMe, captcha});
     },
     logout() {
         return instance.delete(`auth/login`);
+    }
+};
+
+export const securityAPI = {
+    getCaptcha() {
+        return instance.get('security/get-captcha-url');
     }
 }

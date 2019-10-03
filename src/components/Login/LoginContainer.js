@@ -5,13 +5,14 @@ import {login} from '../../redux/authReducer';
 import Login from './Login';
 
 class LoginAPIComponent  extends React.Component {
-    onLogin = (email, password, rememberMe) => {
-        this.props.login(email, password, rememberMe);
+    onLogin = (email, password, rememberMe, captcha) => {
+        this.props.login(email, password, rememberMe, captcha);
     }
     render() {
         return( <div className={styles.loginForm}>
             <Login
                 isAuth = {this.props.isAuth}
+                captchaUrl = {this.props.captchaUrl}
                 onLogin = {this.onLogin}
         /></div>);
     }
@@ -19,7 +20,8 @@ class LoginAPIComponent  extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.authPage.isAuth
+        isAuth: state.authPage.isAuth,
+        captchaUrl : state.authPage.captchaUrl
     }
 };
 

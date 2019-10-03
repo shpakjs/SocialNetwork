@@ -8,6 +8,7 @@ let Users = (props) => {
             {props.users.map(user => {
                 return <User
                     user={user} 
+                    key = {user.id}
                     followingInProgress={props.followingInProgress} 
                     toggleFollowing={props.toggleFollowing} />
             })}

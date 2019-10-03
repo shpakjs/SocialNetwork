@@ -1,4 +1,5 @@
 import {profileAPI} from '../api/api';
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = 'ADD-POST';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
@@ -87,17 +88,26 @@ export const savePhoto = (photo) => async (dispatch) => {
 //thunk creator
 export const getProfile = (userId) => async(dispatch) => {
     dispatch(toggleIsFetchingAC(true));
-    let response = await profileAPI.getUserProfile(userId);    
+    let response = await profileAPI.getUserProfile(userId); 
     dispatch(setProfileInfoAC(response));
     dispatch(toggleIsFetchingAC(false));
 }
 
 //thunk creator
-export const saveProfile = (formData) => async(dispatch) => {
-    dispatch(toggleIsFetchingAC(true));
-    let response = await profileAPI.saveUserProfile(formData);  
+export const saveProfile = (formData) => async(dispatch, getState) => {
+    let response = await profileAPI.saveUserProfile(formData);
     if(response.resultCode === 0) {
-        //getProfile(userId);
+        let userId = getState().authPage.userId;
+        dispatch(getProfile(userId));
+    } else {
+        let message = response.messages[0];
+        let errorFieldsArr = message.slice(message.indexOf('(') + 1, message.indexOf(')')).split('->');
+        let errorData = {};
+        errorFieldsArr[1] 
+            ? errorData[errorFieldsArr[0].toLowerCase()] = { [errorFieldsArr[1].toLowerCase()]: 'Invalid data' }  
+            : errorData[errorFieldsArr[0].toLowerCase()] = 'Invalid data';
+        dispatch(stopSubmit("edit-profile", errorData));
+        return Promise.reject(message);
     }
 }
 

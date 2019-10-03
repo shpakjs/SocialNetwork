@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bg from './../../../assets/images/profile-bg.jpg';
 import styles from './ProfileInfo.module.css';
 import userPhoto from '../../../assets/images/user.png'
@@ -8,16 +8,20 @@ import ProfileDataForm from './ProfileDataForm';
 
 const ProfileInfo = (props) => {
     let info = props.info;
-    let editMode = false;
-
+    let [editMode, setEditMode] = useState(false);
+    
     const onMainPhotoSelected = (e) => {
         if (e.target.files.length) {
             props.savePhoto(e.target.files[0]);
         }
     }
-    const setEditMode = (isEdit) => {
-        editMode = true;
+
+    const onProfileFormSubmit = (formData) => {
+        props.saveProfile(formData).then(() => {
+            setEditMode(false);
+        })
     }
+
     return (<div className = {styles.profile}>
             <div className = {styles.profile__header}>
                 <img src = {bg} alt=""/>
@@ -29,12 +33,12 @@ const ProfileInfo = (props) => {
                 </div>
                 <div className = {styles.info}>
                     <h4 className= {styles.name}>{info.fullName}</h4>
-                    <ProfileStatusWithHooks status = {props.status} updateStatus = {props.updateStatus}/>
+                    <ProfileStatusWithHooks status = {props.status} updateStatus = {props.updateStatus} />
                 </div>
             </div>
             { editMode 
-                ? <ProfileDataForm contacts={props.contacts} />
-                : <ProfileData contacts={props.contacts} isOwner={props.isOwner} goToEditMode={ () =>  setEditMode(true) }/>
+                ? <ProfileDataForm profile = { info } initialValues={ info } onSubmit={ onProfileFormSubmit } />
+                : <ProfileData { ...info } isOwner={props.isOwner} goToEditMode={ () =>  setEditMode(true) }/>
             }
         </div>);
 }
