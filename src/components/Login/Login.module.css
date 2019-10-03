@@ -5,22 +5,19 @@ h4 {
     margin: 10px auto;
 }
 
-input {
+.login input {
+    display: block;
     padding: 10px;
     font-size: 13px;
     border: 1px solid #222;
     background: rgba(0,0,0,0.5);
     color: #fff;
 }
-input:focus {
+.login input:focus {
     outline: none;
     border: 1px solid #bbb;
     transition: .3s;
     background: rgba(0,0,0,0.5);
-}
-.summaryError{
-    color: rgb(233, 86, 111);
-    padding: 5px;
 }
 
 .login {
@@ -51,4 +48,28 @@ input:focus {
     padding: 10px 30px;
     border: none;
     margin: 10px auto;
+}
+
+.login input[type="checkbox"] {
+    display: none;
+}
+.login input[type="checkbox"]+label {
+    color: #ccc;
+    width: 100%;
+    text-align: center;
+}
+
+input[type="checkbox"]:checked+label {
+    color: #e9566f;
+}
+
+
+.login form .summaryError {
+    color: rgb(233, 86, 111);
+    padding: 5px;
+}
+
+.captcha {
+    width: 95%;
+    margin: auto;
 }

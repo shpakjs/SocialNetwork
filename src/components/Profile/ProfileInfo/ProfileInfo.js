@@ -29,7 +29,7 @@ const ProfileInfo = (props) => {
             <div className = {styles.user__info}>
                 <div className = {styles.user__photo}>
                     <img src={info.photos.large != null ? info.photos.large: userPhoto} alt="user-pic"/>
-                    { props.isOwner ? <input type="file" onChange={ onMainPhotoSelected } /> : '' }
+                    { props.isOwner ? <div><input type="file" onChange={ onMainPhotoSelected } id="file"/><label for="file">change photo</label></div> : '' }
                 </div>
                 <div className = {styles.info}>
                     <h4 className= {styles.name}>{info.fullName}</h4>

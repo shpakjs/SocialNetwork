@@ -39,7 +39,7 @@ export const setAuthUserData = (userId, email, login, isAuth) => ({
 
 export const getAuthUserData = () => async (dispatch) => {
     let response = await authAPI.me();
-    if (response.data) {
+    if (response.resultCode === 0) {
         let {id, login, email} = response.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
@@ -47,11 +47,11 @@ export const getAuthUserData = () => async (dispatch) => {
 
 export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
     let response = await authAPI.login(email, password, rememberMe, captcha);
+    debugger;
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserData())
     } else if(response.data.resultCode === 10) {
         dispatch(getCaptchaUrl());
-    } else {
         let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
         dispatch(stopSubmit("login", {_error: message}));
     }

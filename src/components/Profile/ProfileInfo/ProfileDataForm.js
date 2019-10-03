@@ -2,15 +2,16 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 import { Input, createField, Textarea } from '../../common/FormControls/FormControls';
 import { requiredField } from '../../../utils/validators/validators';
+import styles from './ProfileInfo.module.css';
 
 const ProfileDataForm = ({handleSubmit, error}) => {
-    return (<form onSubmit={ handleSubmit }>
-            <div><button >Save</button></div>
+    return (<form onSubmit={ handleSubmit } className={styles.profile__data}>
+            <div><button className={styles.save__btn}>Save</button></div>
             { error && <div>{ error }</div> }
             <h4>Main info</h4>
             { createField("enter your full name", "fullName", requiredField, Input, null, {}) }
-            { createField("", "LookingForAJob", null, "input", "You are looking for a job?", {type:"checkbox"}) }
-            { createField("enter your skills", "LookingForAJobDescription", null, Textarea, null, {}) }
+            { createField("", "lookingForAJob", null, "input", "You are looking for a job?", {type:"checkbox"}) }
+            { createField("enter your skills", "lookingForAJobDescription", null, Textarea, null, {}) }
             { createField("enter something about you", "aboutMe", null, Textarea, null, {}) }
 
             <h4>Contact info</h4>
