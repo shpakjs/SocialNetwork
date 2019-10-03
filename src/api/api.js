@@ -95,7 +95,26 @@ export const dialogsAPI = {
     getDialogMessages(userId) {
         return instance.get(`dialogs/${userId}/messages`);
     },
+    checkIfMessageVieved(messageId) {
+        return instance.get(`dialogs/messages/${messageId}/viewed`);
+    },
     sendMessage(userId, messageText) {
         return instance.post(`dialogs/${userId}/messages`, { body: messageText });
+    },
+    putToSpamMessage(messageId) {
+        return instance.post(`dialogs/messages/${messageId}/spam`);
+    },
+    deleteMessage(messageId) {
+        return instance.delete(`dialogs/messages/${messageId}`); //deletes only for current user
+    },
+    restoreMessage(messageId) {
+        return instance.put(`dialogs/messages/${messageId}/restore`); // restores from deleted and spam messages
+    },
+    getNewMessages() {
+        return instance.get('dialogs/messages/new/count'); //list of new messages
+    },
+    getNewMessagesFromDate(userId, date) {
+        return instance.get(`dialogs/${userId}/messages/new?newerThen=${date}`); //get messages from selected dialog newer then date
     }
+
 }
