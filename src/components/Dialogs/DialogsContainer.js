@@ -1,6 +1,6 @@
 import React from 'react';
 import Dialogs from './Dialogs';
-import { sendMessageCreator, getDialogs } from '../../redux/dialogsReducer';
+import { sendMessage, getDialogs, getDialogMessages } from '../../redux/dialogsReducer';
 import {connect} from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -25,13 +25,18 @@ let mapStateToProps = (state) => {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
         newMessageText: state.dialogsPage.newMessageText,
+        activeDialog: state.dialogsPage.activeDialog,
         isFetching:  state.dialogsPage.isFetching
     }
 };
 
 export default compose(
     connect(mapStateToProps, 
-    { sendMessage: sendMessageCreator, getDialogs: getDialogs}),
+    { 
+        sendMessage: sendMessage, 
+        getDialogs: getDialogs,
+        getDialogMessages: getDialogMessages
+    }),
     withAuthRedirect,
     withRouter
 )(DialogsContainer);

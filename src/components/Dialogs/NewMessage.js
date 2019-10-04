@@ -10,8 +10,8 @@ const NewMessageForm = (props) => {
     return <form onSubmit={props.handleSubmit}>
         <Field 
             component={Textarea}
-            name="newMessageBody" 
-            placeholder="Enter what you want to say" 
+            name="body" 
+            placeholder="Enter whatever you want to say" 
             validate={[requiredField, maxLength100]}
         />
         <button>Send</button>
@@ -22,9 +22,10 @@ const NewMessageReduxForm = reduxForm({form: 'newMessage'})(NewMessageForm);
 
 const NewMessage = (props) => {
     const onSubmitMessage = (formData) => {
-        props.sendMessage(formData);
+        debugger;
+        props.sendMessage(props.dialogId, formData);
     }
-    return <div className={ styles.new__message }><NewMessageReduxForm onSubmit={onSubmitMessage}/></div>
+    return <div className={ styles.new__message }><NewMessageReduxForm onSubmit={onSubmitMessage} dialogId={props.dialogId}/></div>
 }
 
 export default NewMessage;

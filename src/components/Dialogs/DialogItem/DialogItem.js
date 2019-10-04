@@ -10,10 +10,10 @@ const DialogItem = (props) => {
         <div className={styles.dialog}
             id = {props.id} 
             onClick = { onDialogSelected }
-            className = {props.hasNewMessages ? styles.dialog__new : styles.dialog}>
-                <img className={ styles.user__phot } src={props.photos.small ? props.photos.small : user} alt="user" />
+            className = {props.id === props.activeDialog ? `${styles.active} ${styles.dialog}` : styles.dialog}>
+                <img className={ styles.user__photo } src={props.photos.small ? props.photos.small : user} alt="user" />
                 <span className={ styles.user__name }>{props.userName} </span>
-                {props.hasNewMessages && <span className={styles.unreaded}>props.newMessagesCount</span> }
+                {props.hasNewMessages && <span className={styles.unreaded}>{props.newMessagesCount}</span> }
                 <span className={styles.date}>{new Date(props.lastDialogActivityDate).toLocaleDateString('en')}</span>
         </div> 
     );

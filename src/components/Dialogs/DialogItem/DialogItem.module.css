@@ -1,26 +1,51 @@
 .dialog {
+    position: relative;
     font-size: 14px;    
     display: list-item;
     background: #fff;
     padding: 10px;
     border-bottom: 1px solid #ddd;
 }
-.dialog.active {
+.dialog.active,
+.dialog.active .date {
     background: rgb(31, 187, 174);
     color: #fff;
 } 
 
 .user__photo {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     border-radius: 100%;
-    margin-right: 18px;
 } 
 .user__name {
-    margin-top: 0px;
+    margin-left: 10px;
+    vertical-align: top;
+}
+.unreaded {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    display: inline-block;
+    background: #26bfa6;
+    border-radius: 50%;
+    color: #fff;
+    min-width: 18px;
+    width: auto;
+    padding: 0px 1px;
+    text-align: center;
+}
+.dialog__new {
+    background: rgba(212,228,239,1);
+    background: -moz-linear-gradient(top, rgba(212,228,239,1) 0%, rgba(112,219,186,0.38) 56%, rgba(87,217,173,0.28) 70%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(212,228,239,1)), color-stop(56%, rgba(112,219,186,0.28)), color-stop(70%, rgba(87,217,173,0.18)));
+    background: -webkit-linear-gradient(top, rgba(212,228,239,1) 0%, rgba(112,219,186,0.38) 56%, rgba(87,217,173,0.28) 70%);
+    background: -o-linear-gradient(top, rgba(212,228,239,1) 0%, rgba(112,219,186,0.38) 56%, rgba(87,217,173,0.28) 70%);
+    background: -ms-linear-gradient(top, rgba(212,228,239,1) 0%, rgba(112,219,186,0.38) 56%, rgba(87,217,173,0.28) 70%);
+    background: linear-gradient(to bottom, rgba(212,228,239,1) 0%, rgba(112,219,186,0.38) 56%, rgba(87,217,173,0.28) 70%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#57d9ad', GradientType=0 );
 }
 .date {
-    font-size: 12px;
-    color: #aaa;
+    font-size: 10px;
+    color: #999;
     float: right;
 }

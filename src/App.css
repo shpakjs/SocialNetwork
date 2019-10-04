@@ -15,7 +15,6 @@ a, a:hover, a:visited {
 }
 
 button{
-  grid-area: follow;
   border: none;
   box-shadow: none;
   padding: 6px 15px;

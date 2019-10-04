@@ -99,7 +99,8 @@ export const dialogsAPI = {
         return instance.get(`dialogs/messages/${messageId}/viewed`);
     },
     sendMessage(userId, messageText) {
-        return instance.post(`dialogs/${userId}/messages`, { body: messageText });
+        debugger;
+        return instance.post(`dialogs/${userId}/messages`, messageText);
     },
     putToSpamMessage(messageId) {
         return instance.post(`dialogs/messages/${messageId}/spam`);

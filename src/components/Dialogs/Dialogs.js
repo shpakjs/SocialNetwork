@@ -10,25 +10,27 @@ const Dialogs = (props) => {
             <DialogItem 
                 key = {dialog.id} 
                 {...dialog}
+                getDialogMessages = {props.getDialogMessages}
+                activeDialog = {props.activeDialog}
             />);
     });
-    /*let messagesElements = props.messages.map( message => {
+    let messagesElements = props.messages.map( message => {
         return (
             <Message 
             key = {message.id} 
-            message = { message.message }
-            author = {message.author}
-            time = {message.time}
+            {...message}
+            activeDialog = {props.activeDialog}
             />
         );
-    });*/
+    });
     return (
         <div className = {styles.dialogs}> 
             <div className = {styles.dialogs__items}>
                 { dialogsElements }
             </div>
-            <div className = {styles.messages}>                
-                <NewMessage sendMessage={props.addMessage}/>
+            <div className = {styles.messages}>        
+                { messagesElements }        
+                <NewMessage sendMessage={props.sendMessage} dialogId={props.activeDialog}/>
             </div>
         </div>
     );

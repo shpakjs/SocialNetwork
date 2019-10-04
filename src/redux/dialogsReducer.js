@@ -1,39 +1,37 @@
 import {dialogsAPI} from "../api/api";
 
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
-const SEND_MESSAGE = 'SEND-MESSAGE';
+const SEND_MESSAGE_SUCCESS = 'SEND_MESSAGE_SUCCESS';
 const GET_DIALOGS_SUCCESS = 'GET_DIALOGS_SUCCESS';
+const GET_DIALOG_MESSAGES_SUCCESS = 'GET_DIALOG_MESSAGES_SUCCESS';
 let initialState = {
     dialogs: [],
-    messages: [
-        { id: 1, author: 'Yuliia', time: '21:00', message:'Hi'},
-        { id: 2, author: 'Anton', time: '07:00', message:'How r u'},
-        { id: 3, author: 'Anton', time: '12:31', message:'fantastic and u?'},
-        { id: 4, author: 'Yuliia', time: '12:47', message: 'want some pizza'},
-        { id: 5, author: 'Anton', time: '21:55', message:'me too'},
-    ],
+    messages: [],
     newMessageText: '',
-    isFetching: false
+    isFetching: false,
+    activeDialog: null
 };
 
 const dialogsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case SEND_MESSAGE:
-            let newMessage = {
-                id: state.messages.length + 2, 
-                author: 'Yuliia', 
-                time: '21:00', 
-                message: action.messageText.newMessageBody
-            };
+        case SEND_MESSAGE_SUCCESS:
+            debugger;
             return {
                 ...state,
-                messages:[...state.messages, newMessage],
+                messages:[...state.messages],
                 newMessageText: ''
             };
         case GET_DIALOGS_SUCCESS: 
             return {
                 ...state,
                 dialogs: [...action.dialogs]
+            }
+        case GET_DIALOG_MESSAGES_SUCCESS: 
+            return {
+                ...state,
+                messages : [...action.messages],
+                activeDialog: action.dialogId
+
             }
         case TOGGLE_IS_FETCHING: {
             return { ...state, isFetching: action.isFetching }
@@ -42,9 +40,11 @@ const dialogsReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const sendMessageCreator = (messageText) => ({ type: SEND_MESSAGE , messageText: messageText});  
+export const sendMessageSuccess = (messageText) => ({ type: SEND_MESSAGE_SUCCESS , messageText: messageText});  
 
 export const getDialogsSuccess = (dialogs) => ({ type:  GET_DIALOGS_SUCCESS , dialogs: dialogs});  
+
+export const getDialogMessagesSuccess = (messages, dialogId) => ({ type:  GET_DIALOG_MESSAGES_SUCCESS , messages: messages, dialogId: dialogId});  
 
 export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 //thunk creator
@@ -57,4 +57,17 @@ export const getDialogs = () => async (dispatch) => {
     dispatch(toggleIsFetchingAC(false));
 }
 
+export const getDialogMessages = (userId) => async (dispatch) => {
+    dispatch(toggleIsFetchingAC(true));
+    let response = await dialogsAPI.getDialogMessages(userId);
+    dispatch(getDialogMessagesSuccess(response.data.items, userId));
+    dispatch(toggleIsFetchingAC(false));
+}
+
+export const sendMessage = (userId, body) => async (dispatch) => {
+    let response = await dialogsAPI.sendMessage(userId, body);
+    if(response.data.resultCode === 0) {
+        dispatch(getDialogMessages(userId));
+    }
+}
 export default dialogsReducer;

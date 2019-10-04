@@ -12,11 +12,13 @@
 .messages {
     position: relative;
     padding: 2%;
+    overflow: auto;
+    padding-bottom: 148px;
 }
 .new__message {
-    width: 98%;
+    width: 68%;
     background: #fff;
-    position: absolute;
+    position: fixed;
     bottom: 0;
 }
 .new__message textarea {

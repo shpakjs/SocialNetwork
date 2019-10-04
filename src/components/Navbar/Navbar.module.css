@@ -35,3 +35,7 @@
 a.active{
     color: rgb(233, 86, 111);
 } 
+
+button {
+    margin: 0;
+}
