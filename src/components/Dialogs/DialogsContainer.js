@@ -9,8 +9,9 @@ import Preloader from '../common/Preloader/Preloader';
 
 class DialogsContainer extends React.Component {
     componentDidMount() {
-        this.props.getDialogs();
-        if(this.props.dialogs.length > 0) this.props.getDialogMessages(this.props.dialogs[0]);
+        this.props.getDialogs().then(() => {
+            if(this.props.dialogs.length > 0) this.props.getDialogMessages(this.props.dialogs[0].id);
+        });
     }
     
     render() {

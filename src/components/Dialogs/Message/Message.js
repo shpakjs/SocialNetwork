@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Message.module.css';
-
+import {NavLink} from 'react-router-dom';
 const Message = (props) => {
     const onMessageSelected = () => {
         props.selectMessage(props.id);
@@ -17,7 +17,7 @@ const Message = (props) => {
                     ${ props.isSelected ? styles.selected : '' }`}
                 onClick={onMessageSelected}>
                 <div className = {styles.message__info}>
-                    <div className = {styles.author}>{props.senderName}</div>
+                    <NavLink to={'/profile' + props.senderId} className = {styles.author}>{props.senderName}</NavLink>
                     <div className = {styles.time}>{new Date(props.addedAt).toLocaleDateString()}</div>
                 </div>
                 {props.body}
