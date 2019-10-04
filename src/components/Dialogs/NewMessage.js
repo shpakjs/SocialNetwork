@@ -22,7 +22,6 @@ const NewMessageReduxForm = reduxForm({form: 'newMessage'})(NewMessageForm);
 
 const NewMessage = (props) => {
     const onSubmitMessage = (formData) => {
-        debugger;
         props.sendMessage(props.dialogId, formData);
     }
     return <div className={ styles.new__message }><NewMessageReduxForm onSubmit={onSubmitMessage} dialogId={props.dialogId}/></div>

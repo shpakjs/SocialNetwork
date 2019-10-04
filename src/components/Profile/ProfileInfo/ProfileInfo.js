@@ -31,7 +31,7 @@ const ProfileInfo = (props) => {
             <div className = {styles.user__info}>
                 <div className = {styles.user__photo}>
                     <img src={info.photos.large != null ? info.photos.large: userPhoto} alt="user-pic"/>
-                    { props.isOwner ? <div><input type="file" onChange={ onMainPhotoSelected } id="file"/><label for="file">change photo</label></div> : <button onClick={onStartDialog}>Text to {info.fullName}</button> }
+                    { props.isOwner ? <div><input type="file" onChange={ onMainPhotoSelected } id="file"/><label htmlFor="file">change photo</label></div> : <button onClick={onStartDialog}>Text to {info.fullName}</button> }
                 </div>
                 <div className = {styles.info}>
                     <h4 className= {styles.name}>{info.fullName}</h4>

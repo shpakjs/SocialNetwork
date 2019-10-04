@@ -99,13 +99,12 @@ export const dialogsAPI = {
         return instance.get(`dialogs/messages/${messageId}/viewed`);
     },
     sendMessage(userId, messageText) {
-        debugger;
         return instance.post(`dialogs/${userId}/messages`, messageText);
     },
     putToSpamMessage(messageId) {
         return instance.post(`dialogs/messages/${messageId}/spam`);
     },
-    deleteMessage(messageId) {
+    removeMessage(messageId) {
         return instance.delete(`dialogs/messages/${messageId}`); //deletes only for current user
     },
     restoreMessage(messageId) {

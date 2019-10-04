@@ -15,17 +15,30 @@
     overflow: auto;
     padding-bottom: 148px;
 }
+.messages__control {
+    width: 100%;
+    background: #fff;
+    padding: 10px 0 0;
+    display: flex;
+    justify-content: flex-end;
+}
+.messages__control button {
+    margin: 0 15px 0 0;
+    background: rgb(44, 44, 44);
+}
 .new__message {
-    width: 68%;
+    width: 69%;
     background: #fff;
     position: fixed;
     bottom: 0;
+    left: 30%;
+    height: 147px;
 }
 .new__message textarea {
     width: 95%;
     display: block;
     height: 50px;
-    margin: 20px 0;
+    margin: 20px 1%;
     border: 1px solid #ccc;
 }
 

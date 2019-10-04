@@ -1,26 +1,21 @@
 import {dialogsAPI} from "../api/api";
+import {change} from 'redux-form';
 
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
-const SEND_MESSAGE_SUCCESS = 'SEND_MESSAGE_SUCCESS';
 const GET_DIALOGS_SUCCESS = 'GET_DIALOGS_SUCCESS';
 const GET_DIALOG_MESSAGES_SUCCESS = 'GET_DIALOG_MESSAGES_SUCCESS';
+const SELECT_MESSAGE = 'SELECT_MESSAGE';
+const CLEAR_SELECTED_MESSAGES = 'CLEAR_SELECTED_MESSAGES';
 let initialState = {
     dialogs: [],
     messages: [],
-    newMessageText: '',
+    selectedMessages: [],
     isFetching: false,
     activeDialog: null
 };
 
 const dialogsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case SEND_MESSAGE_SUCCESS:
-            debugger;
-            return {
-                ...state,
-                messages:[...state.messages],
-                newMessageText: ''
-            };
         case GET_DIALOGS_SUCCESS: 
             return {
                 ...state,
@@ -33,16 +28,33 @@ const dialogsReducer = (state = initialState, action) => {
                 activeDialog: action.dialogId
 
             }
+        case SELECT_MESSAGE: 
+            let selectedItems = [];
+            //first check if we have to select or deselect message
+            if (state.selectedMessages.includes(action.messageId)) {
+                selectedItems = state.selectedMessages.filter(item => item !== action.messageId );
+            } else {
+                selectedItems = [...state.selectedMessages, action.messageId];
+            }
+            return {
+                ...state,
+                selectedMessages: selectedItems
+            }
         case TOGGLE_IS_FETCHING: {
             return { ...state, isFetching: action.isFetching }
+        }
+        case CLEAR_SELECTED_MESSAGES: {
+            return { ...state, selectedMessages: []}
         }
         default: 
             return state;
     }
 }
-export const sendMessageSuccess = (messageText) => ({ type: SEND_MESSAGE_SUCCESS , messageText: messageText});  
-
 export const getDialogsSuccess = (dialogs) => ({ type:  GET_DIALOGS_SUCCESS , dialogs: dialogs});  
+
+export const selectMessage = (messageId) => ({ type: SELECT_MESSAGE , messageId: messageId}); 
+
+export const clearSelectedMessages = () => ({ type: CLEAR_SELECTED_MESSAGES }); 
 
 export const getDialogMessagesSuccess = (messages, dialogId) => ({ type:  GET_DIALOG_MESSAGES_SUCCESS , messages: messages, dialogId: dialogId});  
 
@@ -60,6 +72,7 @@ export const getDialogs = () => async (dispatch) => {
 export const getDialogMessages = (userId) => async (dispatch) => {
     dispatch(toggleIsFetchingAC(true));
     let response = await dialogsAPI.getDialogMessages(userId);
+    dispatch(clearSelectedMessages());
     dispatch(getDialogMessagesSuccess(response.data.items, userId));
     dispatch(toggleIsFetchingAC(false));
 }
@@ -67,7 +80,23 @@ export const getDialogMessages = (userId) => async (dispatch) => {
 export const sendMessage = (userId, body) => async (dispatch) => {
     let response = await dialogsAPI.sendMessage(userId, body);
     if(response.data.resultCode === 0) {
+        dispatch(change('newMessage', 'body', null));
         dispatch(getDialogMessages(userId));
     }
 }
+export const removeMessage = (messageId, dialogId) => async (dispatch) => {
+    let response = await dialogsAPI.removeMessage(messageId);
+    if(response.data.resultCode === 0) {
+        dispatch(clearSelectedMessages());
+        dispatch(getDialogMessages(dialogId));
+    }
+}
+export const spamMessage = (messageId, dialogId) => async (dispatch) => {
+    let response = await dialogsAPI.putToSpamMessage(messageId);
+    if(response.data.resultCode === 0) {
+        dispatch(clearSelectedMessages());
+        dispatch(getDialogMessages(dialogId));
+    }
+}
+
 export default dialogsReducer;

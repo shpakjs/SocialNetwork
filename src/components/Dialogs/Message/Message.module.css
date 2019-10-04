@@ -6,11 +6,16 @@
 .message {
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin: 0px;
+    margin: 1px 0;
     width: max-content;
     padding: 5px;
     position: relative;
     font-size: 14px;
+}
+.message__info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .author {
@@ -35,19 +40,25 @@
     height: 10px;
     border: 1px solid #ddd;
 }
-.message:not(.my)::before,
-.message.unviewed:not(.my)::before {
+
+.message.unviewed, .message.unviewed:before {
+    border: 1px solid rgb(233, 86, 111);
+}
+
+.message.selected, .message.selected::before {
+    border: 1px solid rgb(31, 187, 174);
+}
+
+.message:not(.my)::before {
     left: -12px;
     border-radius: 10px 0 0px 10px;
     border-right-color: #fff;
 }
-.message.my:before,
-.message.unviewed.my:before {
+.message.my:before {
     right: -12px;
     border-radius: 0px 10px 10px 0px;
     border-left-color: #fff;
 }
-
-.message.unviewed, .message.unviewed:before {
-    border: 1px solid rgb(233, 86, 111);
+.message.selected .author {
+    color: rgb(31, 187, 174);
 }
